@@ -1,0 +1,455 @@
+/* ===========================
+   NYC-Themed Wedding Website
+   Benjamin Heald & Naufa Amirani
+   =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --dark: #0d0d1a;
+  --dark-mid: #141428;
+  --dark-light: #1e1e3a;
+  --white: #f5f0e8;
+  --white-muted: #c8c0b0;
+  --accent: #e8c97a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ---- Skyline Hero ---- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem 0;
+  background: linear-gradient(180deg, #0a0a1a 0%, #0d0d2e 50%, #0a1428 100%);
+  overflow: hidden;
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--dur, 3s) infinite alternate;
+  opacity: var(--op, 0.6);
+}
+
+@keyframes twinkle {
+  from { opacity: var(--op, 0.6); }
+  to   { opacity: calc(var(--op, 0.6) * 0.2); }
+}
+
+/* NYC Skyline SVG */
+.skyline-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.skyline-wrap svg {
+  display: block;
+  width: 100%;
+}
+
+/* Hero text */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding-bottom: 260px;
+}
+
+.hero-tagline {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+
+.hero-names {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--white);
+  text-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+}
+
+.hero-names .ampersand {
+  display: block;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 0.65em;
+  margin: 0.15em 0;
+}
+
+.hero-date {
+  margin-top: 1.8rem;
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+}
+
+.hero-date span {
+  color: var(--gold-light);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeUpDown 2s infinite;
+}
+
+.scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+@keyframes fadeUpDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50%       { transform: translateX(-50%) translateY(6px); opacity: 0.5; }
+}
+
+/* ---- Shared Section ---- */
+section {
+  padding: 5rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0 auto 2.5rem;
+}
+
+/* ---- Details Section ---- */
+#details {
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.detail-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  transition: border-color 0.3s;
+}
+
+.detail-card:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.detail-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.detail-card h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.detail-card p {
+  color: var(--white-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.detail-card p strong {
+  color: var(--white);
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.map-link:hover {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+/* ---- Countdown ---- */
+#countdown {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(10, 10, 40, 0.8) 100%);
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  max-width: 100%;
+  padding: 4rem 1.5rem;
+}
+
+#countdown > .inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  min-width: 1.5ch;
+  text-align: center;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+  margin-top: 0.5rem;
+}
+
+.countdown-sep {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: rgba(201, 168, 76, 0.3);
+  align-self: flex-start;
+  padding-top: 0.1em;
+  line-height: 1;
+}
+
+/* ---- Gifts Section ---- */
+#gifts {
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.gifts-box {
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.gifts-box .big-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.gifts-box p {
+  color: var(--white-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.gifts-box p strong {
+  color: var(--white);
+}
+
+/* ---- RSVP Section ---- */
+#rsvp {
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.rsvp-intro {
+  color: var(--white-muted);
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.contact-options {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border-radius: 4px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.contact-btn.sms {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+}
+
+.contact-btn.sms:hover {
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.contact-btn.whatsapp {
+  background: #25D366;
+  border: 1.5px solid #25D366;
+  color: #fff;
+}
+
+.contact-btn.whatsapp:hover {
+  background: #1ebe5c;
+  border-color: #1ebe5c;
+}
+
+.contact-btn .btn-icon {
+  font-size: 1.1rem;
+}
+
+.rsvp-deadline {
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  color: var(--white-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ---- Footer ---- */
+footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+  color: rgba(200, 192, 176, 0.4);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+}
+
+footer .footer-names {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: rgba(201, 168, 76, 0.5);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .hero-content {
+    padding-bottom: 160px;
+  }
+  .scroll-hint {
+    bottom: 180px;
+  }
+  .countdown-sep {
+    display: none;
+  }
+}
