@@ -321,26 +321,53 @@
     <div class="divider"></div>
 
     <p class="rsvp-intro">
-      Please let us know if you'll be attending by contacting Ben directly
-      via <strong>SMS</strong> or <strong>WhatsApp</strong> at the number below.
+      Fill in your details below, then tap the button to send your RSVP
+      directly to Ben via <strong>SMS</strong> or <strong>WhatsApp</strong>.
     </p>
 
-    <div class="contact-options">
-      <a class="contact-btn sms"
-         href="sms:+14752793844?body=Hi%20Ben!%20I%27d%20like%20to%20RSVP%20for%20your%20wedding%20on%20April%204%2C%202026."
-         aria-label="RSVP via SMS to Ben at (475) 279-3844">
-        <span class="btn-icon">💬</span>
-        SMS Ben
-      </a>
-      <a class="contact-btn whatsapp"
-         href="https://wa.me/14752793844?text=Hi%20Ben!%20I%27d%20like%20to%20RSVP%20for%20your%20wedding%20on%20April%204%2C%202026."
-         target="_blank"
-         rel="noopener noreferrer"
-         aria-label="RSVP via WhatsApp to Ben at (475) 279-3844">
-        <span class="btn-icon">📱</span>
-        WhatsApp Ben
-      </a>
-    </div>
+    <form class="rsvp-form" id="rsvpForm" novalidate>
+
+      <div class="rsvp-field">
+        <label for="rsvp-name">Your Name</label>
+        <input
+          type="text"
+          id="rsvp-name"
+          name="rsvp-name"
+          placeholder="First &amp; Last Name"
+          autocomplete="name"
+          maxlength="80"
+          required
+        />
+      </div>
+
+      <div class="rsvp-field">
+        <label>Will you be attending?</label>
+        <div class="rsvp-radio-group" role="group" aria-label="Attendance">
+          <label class="rsvp-radio">
+            <input type="radio" name="attending" value="yes" required />
+            <span class="rsvp-radio-btn">🎉 Yes, I'll be there!</span>
+          </label>
+          <label class="rsvp-radio">
+            <input type="radio" name="attending" value="no" required />
+            <span class="rsvp-radio-btn">😢 Sorry, I can't make it</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="rsvp-error" id="rsvpError" role="alert" aria-live="polite"></p>
+
+      <div class="contact-options">
+        <button type="button" class="contact-btn sms" id="rsvpSms">
+          <span class="btn-icon">💬</span>
+          Send via SMS
+        </button>
+        <button type="button" class="contact-btn whatsapp" id="rsvpWhatsapp">
+          <span class="btn-icon">📱</span>
+          Send via WhatsApp
+        </button>
+      </div>
+
+    </form>
 
     <p class="rsvp-deadline">
       📞 &nbsp;<strong>(475) 279-3844</strong>&nbsp; — Ben Heald
@@ -411,6 +438,51 @@
 
       tick();
       setInterval(tick, 1000);
+    })();
+
+    /* --- RSVP Form --- */
+    (function () {
+      var BEN_NUMBER = '14752793844';
+
+      function buildMessage(name, attending) {
+        var status = attending === 'yes'
+          ? "I'll be there!"
+          : "I'm sorry, I won't be able to make it.";
+        return 'Hi Ben! RSVP for your wedding on April 4, 2026.'
+          + ' My name is ' + name + ' and ' + status;
+      }
+
+      function validate() {
+        var name = document.getElementById('rsvp-name').value.trim();
+        var attending = document.querySelector('input[name="attending"]:checked');
+        var errorEl = document.getElementById('rsvpError');
+
+        if (!name) {
+          errorEl.textContent = 'Please enter your name.';
+          document.getElementById('rsvp-name').focus();
+          return null;
+        }
+        if (!attending) {
+          errorEl.textContent = 'Please select whether you will be attending.';
+          return null;
+        }
+        errorEl.textContent = '';
+        return buildMessage(name, attending.value);
+      }
+
+      document.getElementById('rsvpSms').addEventListener('click', function () {
+        var msg = validate();
+        if (msg) {
+          window.location.href = 'sms:+' + BEN_NUMBER + '?body=' + encodeURIComponent(msg);
+        }
+      });
+
+      document.getElementById('rsvpWhatsapp').addEventListener('click', function () {
+        var msg = validate();
+        if (msg) {
+          window.open('https://wa.me/' + BEN_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+        }
+      });
     })();
   </script>
 </body>
