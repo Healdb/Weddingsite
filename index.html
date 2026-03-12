@@ -259,6 +259,22 @@
           Please arrive at 1:30 PM<br>
           Ceremony begins at 2:00 PM
         </p>
+        <div class="cal-dropdown">
+          <button class="cal-btn" id="calBtn" aria-expanded="false" aria-haspopup="true">
+            Add to Calendar ↓
+          </button>
+          <div class="cal-menu" id="calMenu" role="menu">
+            <a class="cal-option" role="menuitem"
+               href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Wedding+of+Ben+%26+Naufa&amp;dates=20260404T173000Z/20260404T213000Z&amp;details=Please+arrive+at+1%3A30+PM.+Ceremony+begins+at+2%3A00+PM.&amp;location=Al-Hikmah+Mosque%2C+48-01+31st+Ave%2C+Astoria%2C+NY+11103"
+               target="_blank"
+               rel="noopener noreferrer">
+              Google Calendar ↗
+            </a>
+            <button class="cal-option" role="menuitem" id="calIcs">
+              Apple / Outlook (.ics)
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="detail-card">
@@ -459,6 +475,52 @@
 
       tick();
       setInterval(tick, 1000);
+    })();
+
+    /* --- Add to Calendar --- */
+    (function () {
+      var btn  = document.getElementById('calBtn');
+      var menu = document.getElementById('calMenu');
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+
+      document.addEventListener('click', function () {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+
+      document.getElementById('calIcs').addEventListener('click', function () {
+        var lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//BenAndNaufaWedding//EN',
+          'CALSCALE:GREGORIAN',
+          'METHOD:PUBLISH',
+          'BEGIN:VEVENT',
+          'DTSTART:20260404T173000Z',
+          'DTEND:20260404T213000Z',
+          'SUMMARY:Wedding of Ben & Naufa',
+          'DESCRIPTION:Please arrive at 1:30 PM. Ceremony begins at 2:00 PM.',
+          'LOCATION:Al-Hikmah Mosque\\, 48-01 31st Ave\\, Astoria\\, NY 11103',
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ];
+        var blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        var url  = URL.createObjectURL(blob);
+        var a    = document.createElement('a');
+        a.href     = url;
+        a.download = 'ben-and-naufa-wedding.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
     })();
 
     /* --- RSVP Form --- */

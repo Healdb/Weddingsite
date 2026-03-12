@@ -263,6 +263,70 @@ section {
   border-color: var(--gold-light);
 }
 
+/* ---- Add to Calendar ---- */
+.cal-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.8rem;
+}
+
+.cal-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+  padding: 0 0 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.cal-btn:hover {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.cal-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.5rem);
+  background: var(--dark-mid);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 6px;
+  min-width: 190px;
+  z-index: 20;
+  padding: 0.35rem 0;
+}
+
+.cal-menu.open {
+  display: block;
+}
+
+.cal-option {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--white-muted);
+  text-decoration: none;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.cal-option:hover {
+  color: var(--gold-light);
+  background: rgba(201, 168, 76, 0.08);
+}
+
 /* ---- Countdown ---- */
 #countdown {
   text-align: center;
