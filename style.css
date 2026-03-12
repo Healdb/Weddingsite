@@ -383,6 +383,50 @@ section {
   line-height: 1;
 }
 
+/* ---- Dress Code Section ---- */
+#dresscode {
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.dresscode-box {
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.dresscode-box p {
+  color: var(--white-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.dresscode-box p strong {
+  color: var(--white);
+}
+
+.dresscode-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.dresscode-link:hover {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
 /* ---- Gifts Section ---- */
 #gifts {
   text-align: center;
