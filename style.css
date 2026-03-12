@@ -548,10 +548,13 @@ footer .footer-names {
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   .hero-content {
-    padding-bottom: 160px;
+    padding-bottom: 200px;
   }
   .scroll-hint {
-    bottom: 180px;
+    bottom: 210px;
+  }
+  .skyline-wrap svg {
+    height: 200px;
   }
   .countdown-sep {
     display: none;
