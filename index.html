@@ -403,15 +403,14 @@
       </p>
     </div>
   </section>
-    <p class="rsvp-deadline">
-      📞 &nbsp;<strong>(475) 279-3844</strong>&nbsp; — Ben Heald
-    </p>
+    
   </section>
 
   <!-- ========== FOOTER ========== -->
   <footer>
     <span class="footer-names">Benjamin &amp; Naufa</span>
     April 4, 2026 &nbsp;·&nbsp; Astoria, New York
+      📞 &nbsp;<strong>(475) 279-3844</strong>&nbsp; — Ben Heald
   </footer>
 
   <!-- ========== SCRIPTS ========== -->
@@ -436,42 +435,6 @@
         fragment.appendChild(star);
       }
       container.appendChild(fragment);
-    })();
-
-    /* --- Countdown Timer --- */
-    (function () {
-      // Wedding: April 4, 2026 at 14:00 EDT (UTC-4)
-      var wedding = new Date('2026-04-04T14:00:00-04:00').getTime();
-
-      function pad(n) {
-        return n < 10 ? '0' + n : String(n);
-      }
-
-      function tick() {
-        var now = Date.now();
-        var diff = wedding - now;
-
-        if (diff <= 0) {
-          document.getElementById('cd-days').textContent    = '00';
-          document.getElementById('cd-hours').textContent   = '00';
-          document.getElementById('cd-minutes').textContent = '00';
-          document.getElementById('cd-seconds').textContent = '00';
-          return;
-        }
-
-        var days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById('cd-days').textContent    = pad(days);
-        document.getElementById('cd-hours').textContent   = pad(hours);
-        document.getElementById('cd-minutes').textContent = pad(minutes);
-        document.getElementById('cd-seconds').textContent = pad(seconds);
-      }
-
-      tick();
-      setInterval(tick, 1000);
     })();
 
     /* --- Add to Calendar --- */
@@ -517,51 +480,6 @@
         URL.revokeObjectURL(url);
         menu.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
-      });
-    })();
-
-    /* --- RSVP Form --- */
-    (function () {
-      var BEN_NUMBER = '14752793844';
-
-      function buildMessage(name, attending) {
-        var status = attending === 'yes'
-          ? "I'll be there!"
-          : "I'm sorry, I won't be able to make it.";
-        return 'Hi Ben! RSVP for your wedding on April 4, 2026.'
-          + ' My name is ' + name + ' and ' + status;
-      }
-
-      function validate() {
-        var name = document.getElementById('rsvp-name').value.trim();
-        var attending = document.querySelector('input[name="attending"]:checked');
-        var errorEl = document.getElementById('rsvpError');
-
-        if (!name) {
-          errorEl.textContent = 'Please enter your name.';
-          document.getElementById('rsvp-name').focus();
-          return null;
-        }
-        if (!attending) {
-          errorEl.textContent = 'Please select whether you will be attending.';
-          return null;
-        }
-        errorEl.textContent = '';
-        return buildMessage(name, attending.value);
-      }
-
-      document.getElementById('rsvpSms').addEventListener('click', function () {
-        var msg = validate();
-        if (msg) {
-          window.location.href = 'sms:+' + BEN_NUMBER + '?body=' + encodeURIComponent(msg);
-        }
-      });
-
-      document.getElementById('rsvpWhatsapp').addEventListener('click', function () {
-        var msg = validate();
-        if (msg) {
-          window.open('https://wa.me/' + BEN_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
-        }
       });
     })();
   </script>
